@@ -351,12 +351,14 @@
 		892963092134E8F50072E6FD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator watchsimulator watchos appletvos appletvsimulator";
 			};
 			name = Debug;
 		};
 		8929630A2134E8F50072E6FD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator watchsimulator watchos appletvos appletvsimulator";
 			};
 			name = Release;
 		};
@@ -587,6 +589,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mpangburn.OxygenTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos watchsimulator watchos appletvos macosx appletvsimulator";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
@@ -654,6 +657,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mpangburn.OxygenTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos watchsimulator watchos appletvos macosx appletvsimulator";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.2;
