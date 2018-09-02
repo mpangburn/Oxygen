@@ -32,7 +32,7 @@
 		89D86831213C6020003582A6 /* LazyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D86830213C6020003582A6 /* LazyTests.swift */; };
 		89D86833213C6214003582A6 /* ResettableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D86832213C6214003582A6 /* ResettableTests.swift */; };
 		89D86835213C62C3003582A6 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D86834213C62C3003582A6 /* Collection.swift */; };
-		89D86837213C642D003582A6 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D86836213C642D003582A6 /* Array.swift */; };
+		89D86837213C642D003582A6 /* RandomAccessCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D86836213C642D003582A6 /* RandomAccessCollection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,7 +74,7 @@
 		89D86830213C6020003582A6 /* LazyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyTests.swift; sourceTree = "<group>"; };
 		89D86832213C6214003582A6 /* ResettableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResettableTests.swift; sourceTree = "<group>"; };
 		89D86834213C62C3003582A6 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
-		89D86836213C642D003582A6 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		89D86836213C642D003582A6 /* RandomAccessCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomAccessCollection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,10 +170,10 @@
 		892963582134EEDE0072E6FD /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				89D86836213C642D003582A6 /* Array.swift */,
 				89D86834213C62C3003582A6 /* Collection.swift */,
 				8923F0202138F5F30046CD18 /* Comparable.swift */,
 				8923F01E2138F4EF0046CD18 /* Optional.swift */,
+				89D86836213C642D003582A6 /* RandomAccessCollection.swift */,
 				89D8682A213BBE42003582A6 /* Sequence.swift */,
 			);
 			path = Extensions;
@@ -305,7 +305,7 @@
 			files = (
 				8923F0172138EFED0046CD18 /* Delayed.swift in Sources */,
 				8923F01B2138F2580046CD18 /* Container.swift in Sources */,
-				89D86837213C642D003582A6 /* Array.swift in Sources */,
+				89D86837213C642D003582A6 /* RandomAccessCollection.swift in Sources */,
 				89D8682B213BBE42003582A6 /* Sequence.swift in Sources */,
 				8923F01D2138F4570046CD18 /* Resettable.swift in Sources */,
 				8923F0212138F5F30046CD18 /* Comparable.swift in Sources */,
@@ -351,6 +351,7 @@
 		892963092134E8F50072E6FD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ONLY_ACTIVE_ARCH = NO;
 				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator watchsimulator watchos appletvos appletvsimulator";
 			};
 			name = Debug;
@@ -358,6 +359,7 @@
 		8929630A2134E8F50072E6FD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ONLY_ACTIVE_ARCH = NO;
 				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator watchsimulator watchos appletvos appletvsimulator";
 			};
 			name = Release;
@@ -440,7 +442,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,3,4";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -517,7 +519,7 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,3,4";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -591,7 +593,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mpangburn.OxygenTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = iphoneos;
+				SDKROOT = "";
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos watchsimulator watchos appletvos macosx appletvsimulator";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -660,7 +662,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mpangburn.OxygenTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SDKROOT = iphoneos;
+				SDKROOT = "";
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos watchsimulator watchos appletvos macosx appletvsimulator";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
