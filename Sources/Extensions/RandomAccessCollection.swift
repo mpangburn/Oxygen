@@ -1,5 +1,5 @@
 //
-//  Array.swift
+//  RandomAccessCollection.swift
 //  Oxygen
 //
 //  Created by Michael Pangburn on 9/2/18.
@@ -8,13 +8,14 @@
 import class Dispatch.DispatchQueue
 
 
-extension Array {
+extension RandomAccessCollection {
     /// Concurrently performs a side effect on each element in the array.
     /// - Parameter body: A side effect to run on each element.
     @inlinable
     public func concurrentForEach(_ body: (Element) -> Void) {
-        DispatchQueue.concurrentPerform(iterations: count) { index in
-            body(self[index])
+        DispatchQueue.concurrentPerform(iterations: count) { offset in
+            let idx = index(startIndex, offsetBy: offset)
+            body(self[idx])
         }
     }
 
@@ -26,9 +27,13 @@ extension Array {
         _ transform: (Element) -> NewElement
     ) -> [NewElement] {
         var result = Atomic(Array<NewElement?>(repeating: nil, count: count))
-        DispatchQueue.concurrentPerform(iterations: count) { index in
-            let transformed = transform(self[index])
-            result.modify { $0[index] = transformed }
+        DispatchQueue.concurrentPerform(iterations: count) { offset in
+            let idx = index(startIndex, offsetBy: offset)
+            let transformed = transform(self[idx])
+            result.modify { result in
+                let idx = result.index(result.startIndex, offsetBy: offset)
+                result[idx] = transformed
+            }
         }
         return result.value.map { $0! }
     }
