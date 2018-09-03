@@ -34,6 +34,7 @@
 		89D86835213C62C3003582A6 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D86834213C62C3003582A6 /* Collection.swift */; };
 		89D86837213C642D003582A6 /* RandomAccessCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D86836213C642D003582A6 /* RandomAccessCollection.swift */; };
 		89D868A0213CA87D003582A6 /* AdjacentPairs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D8689F213CA87D003582A6 /* AdjacentPairs.swift */; };
+		89D868A4213DA76D003582A6 /* MutableCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D868A3213DA76D003582A6 /* MutableCollection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		89D86834213C62C3003582A6 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		89D86836213C642D003582A6 /* RandomAccessCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomAccessCollection.swift; sourceTree = "<group>"; };
 		89D8689F213CA87D003582A6 /* AdjacentPairs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjacentPairs.swift; sourceTree = "<group>"; };
+		89D868A3213DA76D003582A6 /* MutableCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutableCollection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,12 +174,13 @@
 		892963582134EEDE0072E6FD /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				89D8689F213CA87D003582A6 /* AdjacentPairs.swift */,
 				89D86834213C62C3003582A6 /* Collection.swift */,
 				8923F0202138F5F30046CD18 /* Comparable.swift */,
+				89D868A3213DA76D003582A6 /* MutableCollection.swift */,
 				8923F01E2138F4EF0046CD18 /* Optional.swift */,
 				89D86836213C642D003582A6 /* RandomAccessCollection.swift */,
 				89D8682A213BBE42003582A6 /* Sequence.swift */,
-				89D8689F213CA87D003582A6 /* AdjacentPairs.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				89D86835213C62C3003582A6 /* Collection.swift in Sources */,
 				8923F0092138EA2C0046CD18 /* BijectiveMap.swift in Sources */,
 				8923F00D2138ECEC0046CD18 /* KeyPath.swift in Sources */,
+				89D868A4213DA76D003582A6 /* MutableCollection.swift in Sources */,
 				89681421213528DB0069B2B5 /* Tagged.swift in Sources */,
 				8929635B2134EF070072E6FD /* Newtype.swift in Sources */,
 				8923F0112138EF190046CD18 /* Result.swift in Sources */,
