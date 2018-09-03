@@ -33,6 +33,7 @@
 		89D86833213C6214003582A6 /* ResettableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D86832213C6214003582A6 /* ResettableTests.swift */; };
 		89D86835213C62C3003582A6 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D86834213C62C3003582A6 /* Collection.swift */; };
 		89D86837213C642D003582A6 /* RandomAccessCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D86836213C642D003582A6 /* RandomAccessCollection.swift */; };
+		89D868A0213CA87D003582A6 /* AdjacentPairs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D8689F213CA87D003582A6 /* AdjacentPairs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		89D86832213C6214003582A6 /* ResettableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResettableTests.swift; sourceTree = "<group>"; };
 		89D86834213C62C3003582A6 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		89D86836213C642D003582A6 /* RandomAccessCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomAccessCollection.swift; sourceTree = "<group>"; };
+		89D8689F213CA87D003582A6 /* AdjacentPairs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjacentPairs.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +177,7 @@
 				8923F01E2138F4EF0046CD18 /* Optional.swift */,
 				89D86836213C642D003582A6 /* RandomAccessCollection.swift */,
 				89D8682A213BBE42003582A6 /* Sequence.swift */,
+				89D8689F213CA87D003582A6 /* AdjacentPairs.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				8923F01D2138F4570046CD18 /* Resettable.swift in Sources */,
 				8923F0212138F5F30046CD18 /* Comparable.swift in Sources */,
 				8923F0252139FD7C0046CD18 /* Atomic.swift in Sources */,
+				89D868A0213CA87D003582A6 /* AdjacentPairs.swift in Sources */,
 				8923F01F2138F4EF0046CD18 /* Optional.swift in Sources */,
 				89D86835213C62C3003582A6 /* Collection.swift in Sources */,
 				8923F0092138EA2C0046CD18 /* BijectiveMap.swift in Sources */,
