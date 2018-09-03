@@ -47,6 +47,12 @@ extension BijectiveMap {
 
     /// Describes a handler invoked to resolve an insertion conflict.
     public typealias InsertionConflictHandler = (InsertionConflict) throws -> InsertionConflictResolution
+
+    @usableFromInline
+    internal struct _NotOneToOneError: Error {
+        @usableFromInline
+        internal init() { }
+    }
 }
 
 // MARK: - Initialization
@@ -96,12 +102,6 @@ extension BijectiveMap {
                 _inverseMap[y] = x
             }
         }
-    }
-
-    @usableFromInline
-    internal struct _NotOneToOneError: Error {
-        @usableFromInline
-        internal init() { }
     }
 
     /// Creates a two-way one-to-one map if the given dictionary is one-to-one.

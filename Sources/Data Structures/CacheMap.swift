@@ -45,7 +45,7 @@ extension CacheMap {
     public init<S: Sequence>(
         initialValues: S,
         transform: @escaping (Input) -> Output
-        ) where S.Element == Input {
+    ) where S.Element == Input {
         self.init(minimumCapacity: initialValues.underestimatedCount, transform: transform)
         initialValues.forEach { cacheOutput(for: $0) }
     }

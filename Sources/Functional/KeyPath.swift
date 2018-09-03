@@ -47,7 +47,6 @@ public func their<Input, Intermediate, Output>(
     return their(get(intermediateKeyPath), combine)
 }
 
-
 /// Returns a function that combines its first argument with the result of the
 /// transformation applied to its second argument.
 ///
