@@ -20,7 +20,7 @@ public func zip<Sequence1, Sequence2, Sequence3>(
 }
 
 /// A sequence of tuples built out of three underlying sequences.
-public struct Zip3Sequence<Sequence1: Sequence, Sequence2: Sequence, Sequence3: Sequence>: Sequence {
+public struct Zip3Sequence<Sequence1: Sequence, Sequence2: Sequence, Sequence3: Sequence> {
     @usableFromInline
     internal let _sequence1: Sequence1
     @usableFromInline
@@ -36,7 +36,9 @@ public struct Zip3Sequence<Sequence1: Sequence, Sequence2: Sequence, Sequence3: 
     ) {
         (_sequence1, _sequence2, _sequence3) = (sequence1, sequence2, sequence3)
     }
+}
 
+extension Zip3Sequence {
     public struct Iterator: IteratorProtocol {
         public typealias Element = (Sequence1.Element, Sequence2.Element, Sequence3.Element)
 
@@ -76,7 +78,9 @@ public struct Zip3Sequence<Sequence1: Sequence, Sequence2: Sequence, Sequence3: 
             return (element1, element2, element3)
         }
     }
+}
 
+extension Zip3Sequence: Sequence {
     @inlinable
     public func makeIterator() -> Iterator {
         return Iterator(
@@ -84,6 +88,11 @@ public struct Zip3Sequence<Sequence1: Sequence, Sequence2: Sequence, Sequence3: 
             _sequence2.makeIterator(),
             _sequence3.makeIterator()
         )
+    }
+
+    @inlinable
+    public var underestimatedCount: Int {
+        return Swift.min(_sequence1.underestimatedCount, _sequence2.underestimatedCount, _sequence3.underestimatedCount)
     }
 }
 

@@ -10,12 +10,12 @@ import class Dispatch.DispatchQueue
 
 /// A value whose reads and writes are synchronous.
 /// Useful in working with concurrency.
-public struct Atomic<Value> {
+public final class Atomic<Value> {
     @usableFromInline
     internal var _value: Value
 
     @usableFromInline
-    internal let _accessQueue = DispatchQueue(label: "com.mpangburn.Oxygen.atomic")
+    internal let _accessQueue = DispatchQueue(label: "com.mpangburn.oxygen.atomic")
 
     /// Creates a new atomic value, ensuring synchronous reads and writes.
     /// - Parameter value: The value to wrap.
@@ -38,7 +38,7 @@ public struct Atomic<Value> {
     /// - Returns: The modified value.
     @inlinable
     @discardableResult
-    public mutating func modify(with mutate: (inout Value) -> Void) -> Value {
+    public func modify(with mutate: (inout Value) -> Void) -> Value {
         return _accessQueue.sync { mutate(&self._value); return _value }
     }
 
@@ -47,14 +47,14 @@ public struct Atomic<Value> {
     /// - Returns: The updated value.
     @inlinable
     @discardableResult
-    public mutating func update(with transform: (Value) -> Value) -> Value {
+    public func update(with transform: (Value) -> Value) -> Value {
         return modify { $0 = transform($0) }
     }
 
     /// Synchronously assigns the wrapped value to the new value.
     /// - Parameter value: The value to assign.
     @inlinable
-    public mutating func assign(to value: Value) {
+    public func assign(to value: Value) {
         modify { $0 = value }
     }
 }

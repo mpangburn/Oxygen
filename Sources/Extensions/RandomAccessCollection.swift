@@ -9,7 +9,7 @@ import class Dispatch.DispatchQueue
 
 
 extension RandomAccessCollection {
-    /// Concurrently performs a side effect on each element in the array.
+    /// Concurrently performs a side effect on each element in the collection.
     /// - Parameter body: A side effect to run on each element.
     @inlinable
     public func concurrentForEach(_ body: (Element) -> Void) {
@@ -19,14 +19,14 @@ extension RandomAccessCollection {
         }
     }
 
-    /// Concurrently maps a transformation over the array.
+    /// Concurrently maps a transformation over the collection.
     /// - Parameter transform: The transformation to apply to each element.
     /// - Returns: An array containing the transformed elements.
     @inlinable
     public func concurrentMap<NewElement>(
         _ transform: (Element) -> NewElement
     ) -> [NewElement] {
-        var result = Atomic(Array<NewElement?>(repeating: nil, count: count))
+        let result = Atomic(Array<NewElement?>(repeating: nil, count: count))
         DispatchQueue.concurrentPerform(iterations: count) { offset in
             let idx = index(startIndex, offsetBy: offset)
             let transformed = transform(self[idx])
