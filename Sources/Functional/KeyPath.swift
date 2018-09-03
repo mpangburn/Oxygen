@@ -33,6 +33,21 @@ public func their<Input, Intermediate, Output>(
     }
 }
 
+/// Returns a combining function lifted using a key path.
+///
+/// Useful for calls to `Sequence.sorted(by:)` and `Sequence.map(_:)` over tuples.
+/// - Parameter intermediateKeyPath: A key path from an input value to an intermediate value.
+/// - Parameter combine: A function combining two intermediate values into an output value.
+/// - Returns: A function lifting `combine` via `intermediateKeyPath`.
+@inlinable
+public func their<Input, Intermediate, Output>(
+    _ intermediateKeyPath: KeyPath<Input, Intermediate>,
+    _ combine: @escaping (Intermediate, Intermediate) -> Output
+) -> (Input, Input) -> Output {
+    return their(get(intermediateKeyPath), combine)
+}
+
+
 /// Returns a function that combines its first argument with the result of the
 /// transformation applied to its second argument.
 ///
@@ -54,6 +69,21 @@ public func combining<Input, Output>(
 /// Returns a function that combines its first argument with the result of the
 /// transformation applied to its second argument.
 ///
+/// Useful for calls to `Sequence.reduce(_:_:)`.
+/// - Parameter keyPath: A key path from an input value to the output value to combine.
+/// - Parameter combineValues: A function combining two output values.
+/// - Returns: A function that combines its first argument with the key path value of its second argument.
+@inlinable
+public func combining<Input, Output>(
+    _ keyPath: KeyPath<Input, Output>,
+    with combineValues: @escaping (Output, Output) -> Output
+) -> (Output, Input) -> Output {
+    return combining(get(keyPath), with: combineValues)
+}
+
+/// Returns a function that combines its first argument with the result of the
+/// transformation applied to its second argument.
+///
 /// Useful for calls to `Sequence.reduce(into:_:)`.
 /// - Parameter extractValue: A function transforming an input value to the output value to combine.
 /// - Parameter combineValues: A function combining two output values.
@@ -67,6 +97,21 @@ public func combine<Input, Output>(
     return { value, root in
         combineValues(&value, extractValue(root))
     }
+}
+
+/// Returns a function that combines its first argument with the result of the
+/// transformation applied to its second argument.
+///
+/// Useful for calls to `Sequence.reduce(into:_:)`.
+/// - Parameter keyPath: A key path from an input value to the output value to combine.
+/// - Parameter combineValues: A function combining two output values.
+/// - Returns: A function that combines its first argument with the key path value of its second argument.
+@inlinable
+public func combine<Input, Output>(
+    _ keyPath: KeyPath<Input, Output>,
+    with combineValues: @escaping (inout Output, Output) -> Void
+) -> (inout Output, Input) -> Void {
+    return combine(get(keyPath), with: combineValues)
 }
 
 /// Returns a function that mutates a root value by applying the update to the value at the key path.
