@@ -209,7 +209,7 @@ public func updating<Root, Value>(
     with updateValue: @escaping (Value) -> Value
 ) -> (Root) -> Root {
     return { root in
-        with(root, update(keyPath, with: updateValue))
+        withCopy(of: root, update(keyPath, with: updateValue))
     }
 }
 
@@ -225,7 +225,7 @@ public func updating<Root, Value>(
     with mutateValue: @escaping (inout Value) -> Void
 ) -> (Root) -> Root {
     return { root in
-        with(root, update(keyPath, with: mutateValue))
+        withCopy(of: root, update(keyPath, with: mutateValue))
     }
 }
 
@@ -241,6 +241,6 @@ public func setting<Root, Value>(
     to value: Value
 ) -> (Root) -> Root {
     return { root in
-        with(root, set(keyPath, to: value))
+        withCopy(of: root, set(keyPath, to: value))
     }
 }

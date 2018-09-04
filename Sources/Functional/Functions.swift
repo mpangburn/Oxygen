@@ -200,20 +200,6 @@ public func with<Input>(
     try mutate(&input)
 }
 
-/// Creates a copy of the input, mutates it using the given the function, and returns the result.
-/// - Parameter input: The input to copy for mutation.
-/// - Parameter mutate: The closure to apply in mutating the copy of the input.
-/// - Returns: The mutated copy of the input.
-@inlinable
-public func with<Input>(
-    _ input: Input,
-    _ mutate: (inout Input) throws -> Void
-) rethrows -> Input {
-    var result = input
-    try mutate(&result)
-    return result
-}
-
 /// Mutates the given input reference and returns it.
 /// - Parameter input: The input to mutate.
 /// - Parameter mutate: The closure to apply in mutating the input.
@@ -226,4 +212,18 @@ public func with<Input: AnyObject>(
 ) rethrows -> Input {
     try mutate(input)
     return input
+}
+
+/// Creates a copy of the input, mutates it using the given the function, and returns the result.
+/// - Parameter input: The input to copy for mutation.
+/// - Parameter mutate: The closure to apply in mutating the copy of the input.
+/// - Returns: The mutated copy of the input.
+@inlinable
+public func withCopy<Input>(
+    of input: Input,
+    _ mutate: (inout Input) throws -> Void
+) rethrows -> Input {
+    var result = input
+    try mutate(&result)
+    return result
 }
