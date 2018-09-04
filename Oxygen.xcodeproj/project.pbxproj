@@ -143,10 +143,7 @@
 		892963552134EEB50072E6FD /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				892963562134EEBE0072E6FD /* Data Structures */,
-				892963582134EEDE0072E6FD /* Extensions */,
-				892963572134EEC60072E6FD /* Functional */,
-				892963592134EEE60072E6FD /* Wrappers */,
+				89D868AB213E3614003582A6 /* Oxygen */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -199,6 +196,17 @@
 				8923F0122138EF550046CD18 /* Weak.swift */,
 			);
 			path = Wrappers;
+			sourceTree = "<group>";
+		};
+		89D868AB213E3614003582A6 /* Oxygen */ = {
+			isa = PBXGroup;
+			children = (
+				892963562134EEBE0072E6FD /* Data Structures */,
+				892963582134EEDE0072E6FD /* Extensions */,
+				892963572134EEC60072E6FD /* Functional */,
+				892963592134EEE60072E6FD /* Wrappers */,
+			);
+			path = Oxygen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
