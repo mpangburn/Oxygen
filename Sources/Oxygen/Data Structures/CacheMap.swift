@@ -6,7 +6,7 @@
 //
 
 /// A map that wraps a function to cache output values once computed.
-public struct CacheMap<Input: Hashable, Output> {
+public final class CacheMap<Input: Hashable, Output> {
     /// The transformation function used to map input values to output values.
     @usableFromInline
     internal let _transform: (Input) -> Output
@@ -14,6 +14,12 @@ public struct CacheMap<Input: Hashable, Output> {
     /// The cached input-output pairs produced by the transformation.
     @usableFromInline
     internal var _cache: [Input: Output]
+
+    @usableFromInline
+    internal init(_transform transform: @escaping (Input) -> Output, cache: [Input: Output]) {
+        _transform = transform
+        _cache = cache
+    }
 }
 
 // MARK: - Initialization
@@ -22,9 +28,8 @@ extension CacheMap {
     /// Creates a map caching the output values of the given function.
     /// - Parameter transform: A function mapping input values to output values.
     @inlinable
-    public init(_ transform: @escaping (Input) -> Output) {
-        self._transform = transform
-        self._cache = [:]
+    public convenience init(_ transform: @escaping (Input) -> Output) {
+        self.init(_transform: transform, cache: [:])
     }
 
     /// Creates a map caching the output values of the given function,
@@ -32,9 +37,8 @@ extension CacheMap {
     /// - Parameter minimumCapacity: The number of input-output pairs for which to reserve space.
     /// - Parameter transform: A function mapping input values to output values.
     @inlinable
-    public init(minimumCapacity: Int, transform: @escaping (Input) -> Output) {
-        self._transform = transform
-        self._cache = Dictionary(minimumCapacity: minimumCapacity)
+    public convenience init(minimumCapacity: Int, transform: @escaping (Input) -> Output) {
+        self.init(_transform: transform, cache: Dictionary(minimumCapacity: minimumCapacity))
     }
 
     /// Creates a map caching the output values of the given function,
@@ -42,7 +46,7 @@ extension CacheMap {
     /// - Parameter initialValues: A sequence containing input values for which to cache output values.
     /// - Parameter transform: A function mapping input values to output values.
     @inlinable
-    public init<S: Sequence>(
+    public convenience init<S: Sequence>(
         initialValues: S,
         transform: @escaping (Input) -> Output
     ) where S.Element == Input {
@@ -53,7 +57,7 @@ extension CacheMap {
     /// Reserves enough space to store the specified number of input-output pairs.
     /// - Parameter minimumCapacity: The requested number of input-output pairs to store.
     @inlinable
-    public mutating func reserveCapacity(_ minimumCapacity: Int) {
+    public func reserveCapacity(_ minimumCapacity: Int) {
         _cache.reserveCapacity(minimumCapacity)
     }
 }
@@ -86,7 +90,7 @@ extension CacheMap {
     /// - Returns: The output value for the given input value.
     @inlinable
     @discardableResult
-    public mutating func cacheOutput(for input: Input, recomputingIfCached shouldRecompute: Bool = false) -> Output {
+    public func cacheOutput(for input: Input, recomputingIfCached shouldRecompute: Bool = false) -> Output {
         if let cachedOutput = self.cachedOutput(for: input), !shouldRecompute {
             return cachedOutput
         } else {
@@ -106,9 +110,7 @@ extension CacheMap {
     /// - Returns: The output value for the given input value.
     @inlinable
     public subscript(input: Input) -> Output {
-        mutating get {
-            return cacheOutput(for: input)
-        }
+        return cacheOutput(for: input)
     }
 }
 
@@ -120,14 +122,14 @@ extension CacheMap {
     /// - Returns: The removed output value, or `nil` if no output value was cached for the input value.
     @inlinable
     @discardableResult
-    public mutating func clearCachedOutput(for input: Input) -> Output? {
+    public func clearCachedOutput(for input: Input) -> Output? {
         return _cache.removeValue(forKey: input)
     }
 
     /// Removes all cached input-output pairs satisfying the given predicate.
     /// - Parameter shouldRemove: A function determining whether an input-output pair should be removed from the cache.
     @inlinable
-    public mutating func clearCache(where shouldRemove: (Element) throws -> Bool) rethrows {
+    public func clearCache(where shouldRemove: (Element) throws -> Bool) rethrows {
         for element in self where try shouldRemove(element) {
             clearCachedOutput(for: element.input)
         }
@@ -138,7 +140,7 @@ extension CacheMap {
     ///                           the buffer capacity, otherwise the underlying buffer is released. The default value is `false`.
     /// - Complexity: O(*n*), where *n* is the number of cached input-output pairs in the map.
     @inlinable
-    public mutating func clearCache(keepingCapacity keepCapacity: Bool = false) {
+    public func clearCache(keepingCapacity keepCapacity: Bool = false) {
         _cache.removeAll(keepingCapacity: keepCapacity)
     }
 
@@ -147,7 +149,7 @@ extension CacheMap {
     /// - Returns: A map of the pairs that `isIncluded` allows.
     @inlinable
     public func filter(_ isIncluded: (Element) throws -> Bool) rethrows -> CacheMap {
-        var result = CacheMap(_transform)
+        let result = CacheMap(_transform)
         result._cache = try _cache.filter(isIncluded)
         return result
     }
