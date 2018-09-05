@@ -35,6 +35,7 @@
 		89D86837213C642D003582A6 /* RandomAccessCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D86836213C642D003582A6 /* RandomAccessCollection.swift */; };
 		89D868A0213CA87D003582A6 /* AdjacentPairs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D8689F213CA87D003582A6 /* AdjacentPairs.swift */; };
 		89D868A4213DA76D003582A6 /* MutableCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D868A3213DA76D003582A6 /* MutableCollection.swift */; };
+		89D868B3213F7884003582A6 /* NonemptyCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D868B2213F7884003582A6 /* NonemptyCollection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		89D86836213C642D003582A6 /* RandomAccessCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomAccessCollection.swift; sourceTree = "<group>"; };
 		89D8689F213CA87D003582A6 /* AdjacentPairs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjacentPairs.swift; sourceTree = "<group>"; };
 		89D868A3213DA76D003582A6 /* MutableCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutableCollection.swift; sourceTree = "<group>"; };
+		89D868B2213F7884003582A6 /* NonemptyCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonemptyCollection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 				8923F0082138EA2C0046CD18 /* BijectiveMap.swift */,
 				8923F0222138F60A0046CD18 /* CacheMap.swift */,
 				8923F0102138EF190046CD18 /* Result.swift */,
+				89D868B2213F7884003582A6 /* NonemptyCollection.swift */,
 			);
 			path = "Data Structures";
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				89D86835213C62C3003582A6 /* Collection.swift in Sources */,
 				8923F0092138EA2C0046CD18 /* BijectiveMap.swift in Sources */,
 				8923F00D2138ECEC0046CD18 /* KeyPath.swift in Sources */,
+				89D868B3213F7884003582A6 /* NonemptyCollection.swift in Sources */,
 				89D868A4213DA76D003582A6 /* MutableCollection.swift in Sources */,
 				89681421213528DB0069B2B5 /* Tagged.swift in Sources */,
 				8929635B2134EF070072E6FD /* Newtype.swift in Sources */,
