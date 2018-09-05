@@ -10,7 +10,7 @@ import XCTest
 
 class CacheMapTests: XCTestCase {
     func testCacheMap() {
-        var map = CacheMap<String, String> { $0.uppercased() }
+        let map = CacheMap<String, String> { $0.uppercased() }
         XCTAssert(map.isEmpty)
 
         map.cacheOutput(for: "one")

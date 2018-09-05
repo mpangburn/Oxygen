@@ -23,6 +23,18 @@ public func constant<Input, Output>(
     return { _ in output }
 }
 
+/// Returns a function that produces a new output value on each invocation.
+/// The output value is independent of the input value.
+/// - Parameter outputProvider: An autoclosure producing an output value.
+/// - Returns: A function that produces a new output value on each invocation,
+///            independent of the input value.
+@inlinable
+public func new<Input, Output>(
+    _ outputProvider: @autoclosure @escaping () -> Output
+) -> (Input) -> Output {
+    return { _ in outputProvider() }
+}
+
 /// A function that does nothing.
 /// - Parameter input: An ignored input value.
 @inlinable
