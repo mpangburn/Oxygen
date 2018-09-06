@@ -79,10 +79,14 @@ public final class DisposeBag {
 
 /// A class enabling key path-based observation of a wrapped value.
 public final class Observable<Value> {
-    public typealias Observation<Subvalue> = (
+    /// A function responding to a property change.
+    /// - Parameter updatedValue: The observed value with the change applied.
+    /// - Parameter previousPropertyValue: The previous value of the changed property.
+    /// - Parameter newPropertyValue: The new value of the changed property.
+    public typealias Observation<PropertyValue> = (
         _ updatedValue: Value,
-        _ previousPropertyValue: Subvalue,
-        _ newPropertyValue: Subvalue
+        _ previousPropertyValue: PropertyValue,
+        _ newPropertyValue: PropertyValue
     ) -> Void
 
     @usableFromInline
@@ -105,32 +109,32 @@ public final class Observable<Value> {
     /// - Parameter keyPath: The key path to the value to retrieve.
     /// - Returns: The value of the property specified by the key path.
     @inlinable
-    public subscript<Subvalue>(keyPath: WritableKeyPath<Value, Subvalue>) -> Subvalue {
+    public subscript<PropertyValue>(keyPath: WritableKeyPath<Value, PropertyValue>) -> PropertyValue {
         get {
             return _value[keyPath: keyPath]
         }
-        set(newSubvalue) {
-            let previousSubvalue = _value[keyPath: keyPath]
-            _value[keyPath: keyPath] = newSubvalue
+        set(newPropertyValue) {
+            let previousPropertyValue = _value[keyPath: keyPath]
+            _value[keyPath: keyPath] = newPropertyValue
             _observers[keyPath]?.values.forEach { observe in
-                observe(_value, previousSubvalue, newSubvalue)
+                observe(_value, previousPropertyValue, newPropertyValue)
             }
         }
     }
 
     @usableFromInline
-    internal func _addObserver<Subvalue>(
-        for keyPath: WritableKeyPath<Value, Subvalue>,
+    internal func _addObserver<PropertyValue>(
+        for keyPath: WritableKeyPath<Value, PropertyValue>,
         sendingCurrentValue sendCurrentValue: Bool,
-        observation: @escaping Observation<Subvalue>
+        observation observe: @escaping Observation<PropertyValue>
     ) -> ObservationToken {
         let id = UUID()
-        _observers[keyPath, default: [:]][id] = { value, oldSubvalue, newSubvalue in
-            observation(value, oldSubvalue as! Subvalue, newSubvalue as! Subvalue)
+        _observers[keyPath, default: [:]][id] = { value, oldPropertyValue, newPropertyValue in
+            observe(value, oldPropertyValue as! PropertyValue, newPropertyValue as! PropertyValue)
         }
         if sendCurrentValue {
-            let subvalue = _value[keyPath: keyPath]
-            observation(_value, subvalue, subvalue)
+            let PropertyValue = _value[keyPath: keyPath]
+            observe(_value, PropertyValue, PropertyValue)
         }
         return ObservationToken { [weak self] in
             self?._observers[keyPath]?.removeValue(forKey: id)
@@ -146,9 +150,9 @@ public final class Observable<Value> {
     /// - Parameter observation: A closure responding to changes to the observed property.
     /// - Returns: An observation token determining the lifetime of the observation.
     @inlinable
-    public func observe<Subvalue>(
-        _ keyPath: WritableKeyPath<Value, Subvalue>,
-        with observation: @escaping Observation<Subvalue>
+    public func observe<PropertyValue>(
+        _ keyPath: WritableKeyPath<Value, PropertyValue>,
+        with observation: @escaping Observation<PropertyValue>
     ) -> ObservationToken {
         return _addObserver(for: keyPath, sendingCurrentValue: true, observation: observation)
     }
@@ -160,9 +164,9 @@ public final class Observable<Value> {
     /// - Parameter observation: A closure responding to changes to the observed property.
     /// - Returns: An observation token determining the lifetime of the observation.
     @inlinable
-    public func observeNext<Subvalue>(
-        _ keyPath: WritableKeyPath<Value, Subvalue>,
-        with observation: @escaping Observation<Subvalue>
+    public func observeNext<PropertyValue>(
+        _ keyPath: WritableKeyPath<Value, PropertyValue>,
+        with observation: @escaping Observation<PropertyValue>
     ) -> ObservationToken {
         return _addObserver(for: keyPath, sendingCurrentValue: false, observation: observation)
     }
