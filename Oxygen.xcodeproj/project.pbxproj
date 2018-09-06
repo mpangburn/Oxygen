@@ -26,6 +26,7 @@
 		892963212134E9170072E6FD /* Oxygen.h in Headers */ = {isa = PBXBuildFile; fileRef = 892963132134E9160072E6FD /* Oxygen.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8929635B2134EF070072E6FD /* Newtype.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8929635A2134EF070072E6FD /* Newtype.swift */; };
 		89681421213528DB0069B2B5 /* Tagged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89681420213528DB0069B2B5 /* Tagged.swift */; };
+		89C74EC42140E07C003DE30B /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C74EC32140E07C003DE30B /* Observable.swift */; };
 		89D8682B213BBE42003582A6 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D8682A213BBE42003582A6 /* Sequence.swift */; };
 		89D8682D213C5622003582A6 /* BijectiveMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D8682C213C5622003582A6 /* BijectiveMapTests.swift */; };
 		89D8682F213C5EBB003582A6 /* CacheMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D8682E213C5EBB003582A6 /* CacheMapTests.swift */; };
@@ -71,6 +72,7 @@
 		892963202134E9170072E6FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8929635A2134EF070072E6FD /* Newtype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Newtype.swift; sourceTree = "<group>"; };
 		89681420213528DB0069B2B5 /* Tagged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tagged.swift; sourceTree = "<group>"; };
+		89C74EC32140E07C003DE30B /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		89D8682A213BBE42003582A6 /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
 		89D8682C213C5622003582A6 /* BijectiveMapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BijectiveMapTests.swift; sourceTree = "<group>"; };
 		89D8682E213C5EBB003582A6 /* CacheMapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheMapTests.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				8923F0162138EFED0046CD18 /* Delayed.swift */,
 				8923F0142138EF820046CD18 /* Lazy.swift */,
 				8929635A2134EF070072E6FD /* Newtype.swift */,
+				89C74EC32140E07C003DE30B /* Observable.swift */,
 				8923F0182138F1D70046CD18 /* Reference.swift */,
 				8923F01C2138F4570046CD18 /* Resettable.swift */,
 				89681420213528DB0069B2B5 /* Tagged.swift */,
@@ -336,6 +339,7 @@
 				89D868A4213DA76D003582A6 /* MutableCollection.swift in Sources */,
 				89681421213528DB0069B2B5 /* Tagged.swift in Sources */,
 				8929635B2134EF070072E6FD /* Newtype.swift in Sources */,
+				89C74EC42140E07C003DE30B /* Observable.swift in Sources */,
 				8923F0112138EF190046CD18 /* Result.swift in Sources */,
 				8923F0192138F1D70046CD18 /* Reference.swift in Sources */,
 				8923F0232138F60A0046CD18 /* CacheMap.swift in Sources */,

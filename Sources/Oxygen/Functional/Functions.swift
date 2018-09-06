@@ -68,6 +68,16 @@ public func invoke<Output>(
     return try provider()
 }
 
+/// Returns a function that invokes its input function with the given input.
+/// - Parameter input: The input value with which to invoke the function.
+/// - Returns: A function that invokes its input function with the given input.
+@inlinable
+public func invoke<Input, Output>(
+    with input: Input
+) -> ((Input) -> Output) -> Output {
+    return { f in f(input) }
+}
+
 /// Returns a function that intercepts the input by performing a side effect.
 /// Useful in composing side effects with pure functions.
 /// - Parameter sideEffect: A side effect to perform on the input value.
