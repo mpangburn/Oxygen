@@ -77,17 +77,27 @@ public final class DisposeBag {
     }
 }
 
+/// Describes a change to a property of an observed value.
+public struct PropertyValueChange<PropertyValue> {
+    /// The previous value of the changed property.
+    public let previousPropertyValue: PropertyValue
+
+    /// The new value of the changed property.
+    public let newPropertyValue: PropertyValue
+
+    @usableFromInline
+    internal init(from previousValue: PropertyValue, to newValue: PropertyValue) {
+        previousPropertyValue = previousValue
+        newPropertyValue = newValue
+    }
+}
+
 /// A class enabling key path-based observation of a wrapped value.
 public final class Observable<Value> {
     /// A function responding to a property change.
     /// - Parameter updatedValue: The observed value with the change applied.
-    /// - Parameter previousPropertyValue: The previous value of the changed property.
-    /// - Parameter newPropertyValue: The new value of the changed property.
-    public typealias Observation<PropertyValue> = (
-        _ updatedValue: Value,
-        _ previousPropertyValue: PropertyValue,
-        _ newPropertyValue: PropertyValue
-    ) -> Void
+    /// - Parameter change: A description of the property change.
+    public typealias Observation<PropertyValue> = (_ updatedValue: Value, _ change: PropertyValueChange<PropertyValue>) -> Void
 
     @usableFromInline
     internal var _value: Value
@@ -116,8 +126,9 @@ public final class Observable<Value> {
         set(newPropertyValue) {
             let previousPropertyValue = _value[keyPath: keyPath]
             _value[keyPath: keyPath] = newPropertyValue
+            let change = PropertyValueChange<Any>(from: previousPropertyValue, to: newPropertyValue)
             _observers[keyPath]?.values.forEach { observe in
-                observe(_value, previousPropertyValue, newPropertyValue)
+                observe(_value, change)
             }
         }
     }
@@ -129,12 +140,14 @@ public final class Observable<Value> {
         observation observe: @escaping Observation<PropertyValue>
     ) -> ObservationToken {
         let id = UUID()
-        _observers[keyPath, default: [:]][id] = { value, oldPropertyValue, newPropertyValue in
-            observe(value, oldPropertyValue as! PropertyValue, newPropertyValue as! PropertyValue)
+        _observers[keyPath, default: [:]][id] = { value, change in
+            let change = PropertyValueChange(from: change.previousPropertyValue as! PropertyValue, to: change.newPropertyValue as! PropertyValue)
+            observe(value, change)
         }
         if sendCurrentValue {
             let propertyValue = _value[keyPath: keyPath]
-            observe(_value, propertyValue, propertyValue)
+            let notAnActualChange = PropertyValueChange(from: propertyValue, to: propertyValue)
+            observe(_value, notAnActualChange)
         }
         return ObservationToken { [weak self] in
             self?._observers[keyPath]?.removeValue(forKey: id)
@@ -171,3 +184,8 @@ public final class Observable<Value> {
         return _addObserver(for: keyPath, sendingCurrentValue: false, observation: observation)
     }
 }
+
+extension PropertyValueChange: Equatable where PropertyValue: Equatable { }
+extension PropertyValueChange: Hashable where PropertyValue: Hashable { }
+extension PropertyValueChange: Encodable where PropertyValue: Encodable { }
+extension PropertyValueChange: Decodable where PropertyValue: Decodable { }
