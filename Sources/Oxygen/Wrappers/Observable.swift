@@ -133,8 +133,8 @@ public final class Observable<Value> {
             observe(value, oldPropertyValue as! PropertyValue, newPropertyValue as! PropertyValue)
         }
         if sendCurrentValue {
-            let PropertyValue = _value[keyPath: keyPath]
-            observe(_value, PropertyValue, PropertyValue)
+            let propertyValue = _value[keyPath: keyPath]
+            observe(_value, propertyValue, propertyValue)
         }
         return ObservationToken { [weak self] in
             self?._observers[keyPath]?.removeValue(forKey: id)

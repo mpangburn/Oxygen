@@ -8,24 +8,6 @@
 extension Optional {
     /// Collapses the optional into a single value.
     /// - Parameter wrappedTransform: The transformation to apply if the value is present.
-    /// - Parameter alternativeProvider: The output-providing closure to invoke if the value is absent.
-    /// - Returns: The transformed value if the value is present,
-    ///            or the output of the alternative provider if the value is absent.
-    @inlinable
-    public func converge<Output>(
-        ifSome wrappedTransform: (Wrapped) throws -> Output,
-        ifNone alternativeProvider: () throws -> Output
-    ) rethrows -> Output {
-        switch self {
-        case .some(let wrapped):
-            return try wrappedTransform(wrapped)
-        case .none:
-            return try alternativeProvider()
-        }
-    }
-
-    /// Collapses the optional into a single value.
-    /// - Parameter wrappedTransform: The transformation to apply if the value is present.
     /// - Parameter alternativeProvider: The output-providing autoclosure to invoke if the value is absent.
     /// - Returns: The transformed value if the value is present,
     ///            or the output of the alternative provider if the value is absent.
@@ -34,7 +16,12 @@ extension Optional {
         ifSome wrappedTransform: (Wrapped) throws -> Output,
         ifNone alternativeProvider: @autoclosure () throws -> Output
     ) rethrows -> Output {
-        return try converge(ifSome: wrappedTransform, ifNone: alternativeProvider)
+        switch self {
+        case .some(let wrapped):
+            return try wrappedTransform(wrapped)
+        case .none:
+            return try alternativeProvider()
+        }
     }
 }
 
@@ -78,7 +65,7 @@ extension Optional {
         ifSome someHandler: (Wrapped) throws -> Void,
         ifNone noneHandler: () throws -> Void
     ) rethrows -> Optional {
-        try converge(ifSome: someHandler, ifNone: noneHandler)
+        try converge(ifSome: someHandler, ifNone: noneHandler())
         return self
     }
 
