@@ -298,6 +298,47 @@ extension NonemptyCollection {
         return .init(_unchecked: try _base.map(transform))
     }
 
+    /// Returns the result of combining the elements of the collection using the
+    /// given closure, beginning with the first element of the collection.
+    ///
+    /// - Parameters:
+    ///   - nextPartialResult: A closure that combines an accumulating value and
+    ///     an element of the sequence into a new accumulating value, to be used
+    ///     in the next call of the `nextPartialResult` closure or returned to
+    ///     the caller.
+    /// - Returns: The final accumulated value.
+    @inlinable
+    public func reduce(
+        _ nextPartialResult: (_ partialResult: Element, Element) throws -> Element
+    ) rethrows -> Element {
+        return try reduce(first, nextPartialResult)
+    }
+
+    /// Returns the result of combining the elements of the collection using the
+    /// given closure, beginning with the first element in the collection.
+    /// - Parameters:
+    ///   - updateAccumulatingResult: A closure that updates the accumulating
+    ///     value with an element of the sequence.
+    /// - Returns: The final accumulated value.
+    @inlinable
+    public func reduce(
+        _ updateAccumulatingResult: (_ partialResult: inout Element, Element) throws -> Void
+    ) rethrows -> Element {
+        return try reduce(into: first, updateAccumulatingResult)
+    }
+
+    /// Returns an array containing the elements of this collection in reverse
+    /// order.
+    ///
+    /// - Complexity: O(*n*), where *n* is the length of the sequence.
+    ///
+    /// - Returns: An array containing the elements of this sequence in
+    ///   reverse order.
+    @inlinable
+    public func reversed() -> NonemptyCollection<[Base.Element]> {
+        return .init(_unchecked: _base.reversed())
+    }
+
     /// Returns a random element of the collection, using the given generator as a source for randomness.
     /// - Parameter generator: The random number generator to use when choosing a random element.
     @inlinable
@@ -399,6 +440,35 @@ extension NonemptyCollection where Base: BidirectionalCollection {
     @inlinable
     public var last: Element {
         return _base.last!
+    }
+
+    /// Returns a view presenting the elements of the collection in reverse
+    /// order.
+    ///
+    /// You can reverse a collection without allocating new space for its
+    /// elements by calling this `reversed()` method. A `ReversedCollection`
+    /// instance wraps an underlying collection and provides access to its
+    /// elements in reverse order. This example prints the characters of a
+    /// string in reverse order:
+    ///
+    ///     let word = "Backwards"
+    ///     for char in word.reversed() {
+    ///         print(char, terminator: "")
+    ///     }
+    ///     // Prints "sdrawkcaB"
+    ///
+    /// If you need a reversed collection of the same type, you may be able to
+    /// use the collection's sequence-based or collection-based initializer. For
+    /// example, to get the reversed version of a string, reverse its
+    /// characters and initialize a new `String` instance from the result.
+    ///
+    ///     let reversedWord = String(word.reversed())
+    ///     print(reversedWord)
+    ///     // Prints "sdrawkcaB"
+    ///
+    @inlinable
+    public func reversed() -> NonemptyCollection<ReversedCollection<Base>> {
+        return .init(_unchecked: _base.reversed())
     }
 }
 
