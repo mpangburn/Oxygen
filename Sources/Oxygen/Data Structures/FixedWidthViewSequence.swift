@@ -39,6 +39,7 @@ extension FixedWidthViewSequence: Sequence {
         @usableFromInline
         internal var _reachedEnd: Bool
 
+        @usableFromInline
         init(_base: Base, viewWidth: Int) {
             precondition(viewWidth > 0, "\(FixedWidthViewSequence.self) view width must be a positive integer.")
             self._base = _base
@@ -53,6 +54,7 @@ extension FixedWidthViewSequence: Sequence {
             }
         }
 
+        @inlinable
         public mutating func next() -> Element? {
             guard !_reachedEnd else {
                 return nil
@@ -71,6 +73,7 @@ extension FixedWidthViewSequence: Sequence {
         }
     }
 
+    @inlinable
     public func makeIterator() -> Iterator {
         return Iterator(_base: _base, viewWidth: viewWidth)
     }
