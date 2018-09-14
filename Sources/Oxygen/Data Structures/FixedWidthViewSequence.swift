@@ -61,10 +61,10 @@ extension FixedWidthViewSequence: Sequence {
             }
 
             defer {
-                _base.formIndex(after: &_subsequenceStartIndex)
                 if _subsequenceEndIndex == _base.endIndex {
                     _reachedEnd = true
                 } else {
+                    _base.formIndex(after: &_subsequenceStartIndex)
                     _base.formIndex(after: &_subsequenceEndIndex)
                 }
             }

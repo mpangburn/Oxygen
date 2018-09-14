@@ -33,7 +33,7 @@ extension Comparable {
     /// - Parameter range: The range providing the bounds for clamping.
     /// - Returns: `self` clamped to the bounds of the range.
     @inlinable
-    func clamped(to range: ClosedRange<Self>) -> Self {
+    public func clamped(to range: ClosedRange<Self>) -> Self {
         if self < range.lowerBound {
             return range.lowerBound
         } else if self > range.upperBound {
@@ -50,7 +50,7 @@ extension Comparable {
     /// If `self` is less than the range's lower bound, `self` is assigned to the range's lower bound.
     /// - Parameter range: The range providing the bounds for clamping.
     @inlinable
-    mutating func clamp(to range: ClosedRange<Self>) {
+    public mutating func clamp(to range: ClosedRange<Self>) {
         self = clamped(to: range)
     }
 
@@ -61,7 +61,7 @@ extension Comparable {
     /// - Parameter range: The range providing the upper bound for clamping.
     /// - Returns: `self` clamped to the upper bound of the range.
     @inlinable
-    func clamped(to range: PartialRangeThrough<Self>) -> Self {
+    public func clamped(to range: PartialRangeThrough<Self>) -> Self {
         return min(self, range.upperBound)
     }
 
@@ -74,7 +74,7 @@ extension Comparable {
     /// - Returns: `self` clamped to the bounds of the range.
     /// - Parameter range: The range providing the upper bound for clamping.
     @inlinable
-    mutating func clamp(to range: PartialRangeThrough<Self>) {
+    public mutating func clamp(to range: PartialRangeThrough<Self>) {
         self = clamped(to: range)
     }
 
@@ -85,7 +85,7 @@ extension Comparable {
     /// - Parameter range: The range providing the lower bound for clamping.
     /// - Returns: `self` clamped to the lower bound of the range.
     @inlinable
-    func clamped(to range: PartialRangeFrom<Self>) -> Self {
+    public func clamped(to range: PartialRangeFrom<Self>) -> Self {
         return max(self, range.lowerBound)
     }
 
@@ -95,7 +95,7 @@ extension Comparable {
     /// If `self` is less than the range's lower bound, `self` is assigned to the range's lower bound.
     /// - Parameter range: The range providing the lower bound for clamping.
     @inlinable
-    mutating func clamp(to range: PartialRangeFrom<Self>) {
+    public mutating func clamp(to range: PartialRangeFrom<Self>) {
         self = clamped(to: range)
     }
 }

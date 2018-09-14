@@ -160,6 +160,7 @@
 		892963562134EEBE0072E6FD /* Data Structures */ = {
 			isa = PBXGroup;
 			children = (
+				89D8689F213CA87D003582A6 /* AdjacentPairs.swift */,
 				8923F0082138EA2C0046CD18 /* BijectiveMap.swift */,
 				8923F0222138F60A0046CD18 /* CacheMap.swift */,
 				8923F0102138EF190046CD18 /* Result.swift */,
@@ -182,7 +183,6 @@
 		892963582134EEDE0072E6FD /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				89D8689F213CA87D003582A6 /* AdjacentPairs.swift */,
 				89D86834213C62C3003582A6 /* Collection.swift */,
 				8923F0202138F5F30046CD18 /* Comparable.swift */,
 				89D868A3213DA76D003582A6 /* MutableCollection.swift */,
