@@ -98,7 +98,7 @@ extension Optional {
     /// - Returns: The unwrapped value.
     @inlinable
     public func unwrapped(throwingIfNil error: Error) throws -> Wrapped {
-        return try converge(ifSome: identity, ifNone: try raise(error) as Wrapped)
+        return try converge(ifSome: identity, ifNone: try raise(error))
     }
 
     /// Mandates the presence of the value, aborting execution if the value is absent.

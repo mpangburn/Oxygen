@@ -63,7 +63,7 @@ public func raise<Output>(_ error: Error) throws -> Output {
 /// - Parameter error: The error to throw in the returned function.
 /// - Returns: A function that unconditionally throws the given error.
 @inlinable
-public func raise<Input, Output>(
+public func raising<Input, Output>(
     _ error: Error
 ) -> (Input) throws -> Output {
     return { _ in throw error }
