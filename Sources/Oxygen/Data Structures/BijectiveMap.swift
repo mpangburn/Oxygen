@@ -123,7 +123,7 @@ extension BijectiveMap {
     /// - Parameter map: The one-to-one dictionary to use in creating the map.
     @inlinable
     public init(oneToOneMap map: [DomainElement: CodomainElement]) {
-        self.init(map)!
+        self = BijectiveMap(map).require("The dictionary passed to \(#function) must be one-to-one.")
     }
 
     /// Creates a one-to-one map from the given sequence of pairs.
@@ -144,7 +144,7 @@ extension BijectiveMap {
     /// - Parameter pairs: The element pairs to use in creating the map.
     public init?<S: Sequence>(_ pairs: S) where S.Element == Element {
         do {
-            self = try BijectiveMap(pairs, handlingConflictsWith: { throw $0 })
+            self = try BijectiveMap(pairs, handlingConflictsWith: raise)
         } catch {
             return nil
         }
@@ -175,7 +175,7 @@ extension BijectiveMap {
         mappingWith transform: (DomainElement) -> CodomainElement
     ) where S.Element == DomainElement {
         do {
-            self = try BijectiveMap(domain: domain, mappingWith: transform, handlingConflictsWith: { throw $0 })
+            self = try BijectiveMap(domain: domain, mappingWith: transform, handlingConflictsWith: raise)
         } catch {
             return nil
         }
@@ -249,8 +249,8 @@ extension BijectiveMap {
     /// - Parameter element: The element to insert.
     /// - Throws: `InsertionConflictError` if the element could not be inserted.
     @inlinable
-    public mutating func insert(_ element: Element) throws {
-        try insert(element, handlingConflictsWith: { throw $0 })
+    public mutating func insert(_ element: Element) {
+        insert(element, handlingConflictsWith: always(.chooseNew))
     }
 
     /// Inserts the given element into the map.
@@ -313,7 +313,7 @@ extension BijectiveMap {
                 removePair(forDomainElement: domainElement)
                 return
             }
-            insert((domainElement, newValue), handlingConflictsWith: { _ in .chooseNew })
+            insert((domainElement, newValue))
         }
     }
 
@@ -337,7 +337,7 @@ extension BijectiveMap {
                 removePair(forCodomainElement: codomainElement)
                 return
             }
-            insert((newValue, codomainElement), handlingConflictsWith: { _ in .chooseNew })
+            insert((newValue, codomainElement))
         }
     }
 

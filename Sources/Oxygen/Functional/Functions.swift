@@ -16,8 +16,19 @@ public func identity<Value>(_ value: Value) -> Value {
 /// Returns a constant function—a function that ignores its input in producing its output.
 /// - Parameter output: The value to return in the resulting function.
 /// - Returns: A constant function returning the given output value.
+@available(*, unavailable, renamed: "always")
 @inlinable
 public func constant<Input, Output>(
+    _ output: Output
+) -> (Input) -> Output {
+    return always(output)
+}
+
+/// Returns a constant function—a function that ignores its input in producing its output.
+/// - Parameter output: The value to always return in the resulting function.
+/// - Returns: A constant function returning the given output value.
+@inlinable
+public func always<Input, Output>(
     _ output: Output
 ) -> (Input) -> Output {
     return { _ in output }

@@ -36,13 +36,13 @@ extension Result {
     /// The value in the case of success, or `nil` in the case of failure.
     @inlinable
     public var value: Value? {
-        return converge(ifSuccess: Optional.some, ifFailure: constant(nil))
+        return converge(ifSuccess: Optional.some, ifFailure: always(nil))
     }
 
     /// The error in the case of failure, or `nil` in the case of success.
     @inlinable
     public var error: Error? {
-        return converge(ifSuccess: constant(nil), ifFailure: Optional.some)
+        return converge(ifSuccess: always(nil), ifFailure: Optional.some)
     }
 
     /// Returns `true` in the case of success and `false` in the case of failure.
