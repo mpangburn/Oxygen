@@ -18,7 +18,6 @@
 ///    // Prints "(2, 3)"
 ///    // Prints "(3, 4)"
 ///    // Prints "(4, 5)"
-@_fixed_layout
 public struct AdjacentPairsSequence<Base: Sequence> {
     @usableFromInline
     internal let _base: Base
@@ -32,7 +31,6 @@ public struct AdjacentPairsSequence<Base: Sequence> {
 
 extension AdjacentPairsSequence {
     /// An iterator for `AdjacentPairsSequence`.
-    @_fixed_layout
     public struct Iterator {
         @usableFromInline
         internal var _base: Base.Iterator

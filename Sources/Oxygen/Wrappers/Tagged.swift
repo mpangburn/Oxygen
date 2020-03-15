@@ -74,5 +74,3 @@ extension Tagged: ExpressibleByFloatLiteral where RawValue: ExpressibleByFloatLi
 extension Tagged: ExpressibleByUnicodeScalarLiteral where RawValue: ExpressibleByUnicodeScalarLiteral { }
 extension Tagged: ExpressibleByExtendedGraphemeClusterLiteral where RawValue: ExpressibleByExtendedGraphemeClusterLiteral { }
 extension Tagged: ExpressibleByStringLiteral where RawValue: ExpressibleByStringLiteral { }
-extension Tagged: Numeric where RawValue: Numeric { }
-extension Tagged: SignedNumeric where RawValue: SignedNumeric { }

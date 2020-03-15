@@ -40,14 +40,7 @@ public struct Lazy<Value> {
     /// Creates a lazy cache for the value provided by the given computation.
     /// - Parameter computation: A closure computing the value.
     @inlinable
-    public init(computation: @escaping () -> Value) {
-        _computation = computation
-    }
-
-    /// Creates a lazy cache for the value provided by the given computation.
-    /// - Parameter computation: An autoclosure computing the value.
-    @inlinable
-    public init(_ computation: @autoclosure @escaping () -> Value) {
+    public init(_ computation: @escaping () -> Value) {
         _computation = computation
     }
 
@@ -67,7 +60,7 @@ extension Lazy {
         _ transform: @escaping (Value) -> NewValue
     ) -> Lazy<NewValue> {
         if let value = _value {
-            return .init(transform(value))
+            return .init { transform(value) }
         } else {
             return .init { [_computation] in transform(_computation()) }
         }
@@ -95,5 +88,5 @@ public func zip<Value1, Value2>(
     _ lazy2: Lazy<Value2>
 ) -> Lazy<(Value1, Value2)> {
     var (lazy1, lazy2) = (lazy1, lazy2)
-    return Lazy((lazy1.value, lazy2.value))
+    return Lazy { (lazy1.value, lazy2.value) }
 }
